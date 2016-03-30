@@ -28,6 +28,7 @@
         <item>Customize</item>
     </string-array>
     <string name="title_activity_edit_profile">EditProfile</string>
+    <string name="imgdesc">imgdesc</string>
 
 
 </resources>
