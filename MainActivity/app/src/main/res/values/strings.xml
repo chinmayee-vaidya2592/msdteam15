@@ -29,6 +29,17 @@
     </string-array>
     <string name="title_activity_edit_profile">EditProfile</string>
     <string name="imgdesc">imgdesc</string>
+    <string name="title_activity_opp_detail">OppDetail</string>
+    <string name="oppDate">THU, MAR 29, 18:30</string>
+    <string name="oppName">Some Event</string>
+    <string name="oppDes">Worried about the required skill level? If you know basic HTML and CSS,
+        then this event is for you.</string>
+    <string name="oppLoc">Dodge Hall</string>
+    <string name="google_maps_key">AIzaSyCx1GzwN5whf4899PJEpjPp4YnWNmHHrsw</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_map">Map</string>
 
 
 </resources>
