@@ -40,9 +40,7 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_map">Map</string>
-    <string name="oppContact">Mr.Joe Smith smith.j@husky.neu.edu</string>
+    <string name="oppContact">Mr.Joe Smith\nsmith.j@husky.neu.edu</string>
     <string name="a1Name">A.Johnson</string>
-
-
-
+    <string name="a2Name">whatever.testing</string>
 </resources>

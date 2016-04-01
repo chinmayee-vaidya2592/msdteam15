@@ -28,18 +28,19 @@
 
             <TextView
                 android:id="@+id/userName"
-                android:text="@string/actual_name"
+                android:text="John Doe"
                 android:layout_marginTop="40px"
                 android:layout_gravity="center"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="20dp"/>
+                android:textSize="20dp"
+                android:textStyle="bold"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/userLevel"
-                android:text="@string/userLevel"
+                android:text="Level 1"
                 android:layout_marginTop="20px"
                 android:layout_gravity="center"
                 android:textSize="20dp"/>
@@ -51,7 +52,7 @@
 
                 <TextView
                     android:text="BIO:"
-                    android:textSize="20dp"
+                    android:textSize="16dp"
                     android:layout_marginTop="40px"
                     android:layout_marginLeft="10px"
                     android:layout_width="wrap_content"
@@ -64,7 +65,7 @@
                     android:layout_marginLeft="20px"
                     android:layout_marginRight="10px"
                     android:textSize="16dp"
-                    android:layout_gravity="center"
+                    android:layout_gravity="left"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
 

@@ -33,7 +33,7 @@ public class AllOppFragment extends ListFragment {
             public void onDataChange(DataSnapshot snapshot) {
                 toDisplay = new ArrayList<>();
                 for (DataSnapshot messageSnapshot : snapshot.getChildren()) {
-                    for (int i =0; i<1; i++) {
+                    for (int i =0; i<3; i++) {
                         int id = Integer.parseInt((String)messageSnapshot.child("oppId").getValue());
                         String img_loc= (String) messageSnapshot.child("pic").getValue();
                         int level = Integer.parseInt((String)messageSnapshot.child("level").getValue());

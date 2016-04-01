@@ -162,14 +162,14 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_marginTop="10px"
+                        android:layout_marginLeft="20px"
                         android:orientation="vertical"
                         android:layout_weight="1">
 
                         <ImageView
-                            android:id="@+id/a1"
-                            android:layout_width="60dp"
+                            android:id="@+id/imageView1"
+                            android:layout_width="50dp"
                             android:layout_height="50dp"
-                            android:layout_marginLeft="20dp"
                             android:layout_gravity="center"
                             android:scaleType="centerCrop"
                             android:src="@drawable/profimg2" />
@@ -177,49 +177,40 @@
                         <TextView
                             android:id="@+id/a1Name"
                             android:layout_marginTop="10px"
-                            android:layout_marginLeft="60px"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
                             android:text="@string/a1Name"
                             android:textSize="10dp"
                             />
                     </LinearLayout>
 
-                    <ImageView
-                        android:id="@+id/a2"
-                        android:layout_width="60dp"
-                        android:layout_height="50dp"
-                        android:layout_marginLeft="20dp"
-                        android:layout_gravity="center"
-                        android:scaleType="centerCrop"
-                        android:src="@drawable/profimg2" />
+                    <LinearLayout
+                        android:id="@+id/e2"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="10px"
+                        android:layout_marginLeft="20px"
+                        android:orientation="vertical"
+                        android:layout_weight="1">
 
-                    <ImageView
-                        android:id="@+id/a3"
-                        android:layout_width="60dp"
-                        android:layout_height="50dp"
-                        android:layout_marginLeft="20dp"
-                        android:layout_gravity="center"
-                        android:scaleType="centerCrop"
-                        android:src="@drawable/profimg2" />
+                        <ImageView
+                            android:id="@+id/imageView2"
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:layout_gravity="center"
+                            android:scaleType="centerCrop"
+                            android:src="@drawable/profimg2" />
 
-                    <ImageView
-                        android:id="@+id/a4"
-                        android:layout_width="60dp"
-                        android:layout_height="50dp"
-                        android:layout_marginLeft="20dp"
-                        android:layout_gravity="center"
-                        android:scaleType="centerCrop"
-                        android:src="@drawable/profimg2" />
+                        <TextView
+                            android:id="@+id/a2Name"
+                            android:layout_marginTop="10px"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/a2Name"
+                            android:textSize="10dp"
+                            />
 
-                    <ImageView
-                        android:id="@+id/a5"
-                        android:layout_width="60dp"
-                        android:layout_height="50dp"
-                        android:layout_marginLeft="20dp"
-                        android:layout_gravity="center"
-                        android:scaleType="centerCrop"
-                        android:src="@drawable/profimg2" />
+                    </LinearLayout>
 
                 </LinearLayout>-->
             </HorizontalScrollView>
