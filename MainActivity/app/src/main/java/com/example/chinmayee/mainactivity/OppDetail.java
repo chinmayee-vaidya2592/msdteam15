@@ -1,10 +1,12 @@
 package com.example.chinmayee.mainactivity;
 
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
+//import android.graphics.Bitmap;
+//import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -32,8 +34,8 @@ public class OppDetail extends AppCompatActivity {
         Firebase mFBRef = new Firebase("https://flickering-inferno-293.firebaseio.com/");
 
         imageView1 = (ImageView) findViewById(R.id.imageView1);
-        Bitmap bm = BitmapFactory.decodeResource(getResources(), R.drawable.profimg2);
-        roundedImage = new RoundImage(bm);
+        //Bitmap bm = BitmapFactory.decodeResource(getResources(), R.drawable.profimg2);
+        //roundedImage = new RoundImage(bm);
         imageView1.setImageDrawable(roundedImage);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -74,5 +76,15 @@ public class OppDetail extends AppCompatActivity {
         });
 
     }
+
+    private void addMapFragment() {
+        FragmentManager manager = getSupportFragmentManager();
+        FragmentTransaction transaction = manager.beginTransaction();
+        MapFragment fragment = new MapFragment();
+        transaction.add(R.id.mapView, fragment);
+        transaction.commit();
+    }
+
+
 
 }
