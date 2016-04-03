@@ -43,4 +43,9 @@
     <string name="oppContact">Mr.Joe Smith\nsmith.j@husky.neu.edu</string>
     <string name="a1Name">A.Johnson</string>
     <string name="a2Name">whatever.testing</string>
+    <string name="title_activity_login">Login</string>
+    <string name="title_activity_register">Register</string>
+    <string name="userName">Username: </string>
+    <string name="placeholder_edit_username">Username </string>
+    <string name="passWord">Password: </string>
 </resources>
