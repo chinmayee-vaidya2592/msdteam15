@@ -1,11 +1,10 @@
 package com.example.chinmayee.mainactivity;
+
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -16,6 +15,8 @@ import com.firebase.client.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
+
+;
 
 /**
  * Created by Swapnil on 3/24/2016.
@@ -40,14 +41,15 @@ public class ThisWeekOppFragment extends ListFragment {
                                                 String longDecs = (String) messageSnapshot.child("longDesc").getValue();
                                                 String shortDesc = (String) messageSnapshot.child("shortDesc").getValue();
                                                 String location = (String) messageSnapshot.child("location").getValue();
-                                                int[] dimScore = new int[5];
+                                                Integer[] dimScore = new Integer[5];
                                                 int sumScore=0;
                                                 for (int j=1; j<6; j++) {
                                                         dimScore[j - 1] = Integer.parseInt((String) messageSnapshot.child("score").child("d" + j).getValue());
                                                         sumScore += dimScore[j - 1];
                                                 }
-                                                String date = (String) messageSnapshot.child("date").getValue();
+                                                String date = (String) messageSnapshot.child("start date").getValue();
                                                 String name = (String) messageSnapshot.child("name").getValue();
+                                                //TODO: add logic for date matching
                                                 toDisplay.add(new Opportunity(id, name, img_loc, date, level, longDecs, shortDesc, dimScore, location));
                                                 //System.out.println(toDisplay.size() + "**********************************************" + date + " " + name);
                                         }

@@ -1,4 +1,4 @@
-package com.example.chinmayee.mainactivity;
+package com.example.chinmayee.mainactivity;;
 
 /**
  * Created by Swapnil on 3/28/2016.
@@ -12,7 +12,7 @@ public class Opportunity {
     private String longDecs;
     private String shortDesc;
     private String location;
-    private int[] dimScore;
+    private Integer[] dimScore;
 
 
     /*public Opportunity(String name, String img_loc) {
@@ -37,7 +37,7 @@ public class Opportunity {
         this.img_loc = img_loc;
     }*/
 
-    public Opportunity(int id, String name, String img_loc, String date, int level, String longDecs, String shortDesc, int[] dimScore, String location) {
+    public Opportunity(int id, String name, String img_loc, String date, int level, String longDecs, String shortDesc, Integer[] dimScore, String location) {
         this.id = id;
         this.name = name;
         this.img_loc = img_loc;
@@ -114,11 +114,11 @@ public class Opportunity {
         this.shortDesc = shortDesc;
     }
 
-    public int[] getDimScore() {
+    public Integer[] getDimScore() {
         return dimScore;
     }
 
-    public void setDimScore(int[] dimScore) {
+    public void setDimScore(Integer[] dimScore) {
         this.dimScore = dimScore;
     }
 
