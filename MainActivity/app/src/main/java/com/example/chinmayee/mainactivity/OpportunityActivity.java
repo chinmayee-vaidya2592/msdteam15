@@ -1,5 +1,6 @@
 package com.example.chinmayee.mainactivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
@@ -31,6 +32,13 @@ public class OpportunityActivity extends AppCompatActivity {
 
     private void setupTablayout() {
         // TODO Auto-generated method stub
+        Intent intent = getIntent();
+   /*     String filter = intent.getExtras().getString("filter");
+        System.out.println("*************************** Filter is :      " + filter);
+        String userLevel = intent.getExtras().getString("userLevel");
+        System.out.println("*************************** level is :      " + userLevel);*/
+
+
         tabLayout = (TabLayout) findViewById(R.id.tabLayout);
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
         tabLayout.addTab(tabLayout.newTab().setText("ALL"));
@@ -38,7 +46,7 @@ public class OpportunityActivity extends AppCompatActivity {
         tabLayout.addTab(tabLayout.newTab().setText("RECOMMENDED"));
         final ViewPager viewPager = (ViewPager) findViewById(R.id.pager);
         final PagerAdapter adapter = new PagerAdapter
-                (getSupportFragmentManager(), tabLayout.getTabCount());
+                (getSupportFragmentManager(), tabLayout.getTabCount(), intent.getExtras());
         viewPager.setAdapter(adapter);
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
         tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {

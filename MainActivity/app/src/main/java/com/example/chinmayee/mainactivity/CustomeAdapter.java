@@ -61,9 +61,9 @@ public class CustomeAdapter extends BaseAdapter {
         int id = parent.getContext().getResources().getIdentifier(imgName, "drawable", parent.getContext().getPackageName());
         imgIcon.setScaleType(ImageView.ScaleType.FIT_XY);
         imgIcon.setImageResource(id);
-        txtDate.setText("Date: "+opp_pos.getDate());
-        txtLoc.setText("Location:" + opp_pos.getLocation());
-        txtTitle.setText("What:"+opp_pos.getShortDesc());
+        txtDate.setText("When: "+opp_pos.getDate());
+        txtLoc.setText("Where: " + opp_pos.getLocation());
+        txtTitle.setText("What: "+opp_pos.getShortDesc());
         txtPts.setText(opp_pos.getTotScore()+"pts");
 
         return convertView;

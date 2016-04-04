@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.firebase.client.DataSnapshot;
@@ -13,10 +14,10 @@ import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
 import com.firebase.client.ValueEventListener;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 import java.util.List;
-
-;
 
 /**
  * Created by Swapnil on 3/24/2016.
@@ -25,17 +26,18 @@ public class AllOppFragment extends ListFragment {
 
     private List<Opportunity> toDisplay;
     private Firebase myFirebaseRef = new Firebase("https://flickering-inferno-293.firebaseio.com/");
+    private Bundle bundle;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.all_opportunities, container, false);
-        //toDisplay.add("TEST1");
-
         myFirebaseRef.child("opportunity").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot snapshot) {
                 toDisplay = new ArrayList<>();
+                bundle = getArguments();
                 for (DataSnapshot messageSnapshot : snapshot.getChildren()) {
-                    for (int i =0; i<10; i++) {
+                    for (int i =0; i<1; i++) {
                         int id = Integer.parseInt((String)messageSnapshot.child("oppId").getValue());
                         String img_loc= (String) messageSnapshot.child("pic").getValue();
                         int level = Integer.parseInt((String)messageSnapshot.child("level").getValue());
@@ -50,20 +52,20 @@ public class AllOppFragment extends ListFragment {
                         }
                         String date = (String) messageSnapshot.child("start date").getValue();
                         String name = (String) messageSnapshot.child("name").getValue();
-                        toDisplay.add(new Opportunity(id, name, img_loc, date, level, longDecs, shortDesc, dimScore, location));
-                        //System.out.println(toDisplay.size() + "**********************************************" + date + " " + name);
+                        String category = (String) messageSnapshot.child("category").getValue();
+                        String catFilter = bundle.getString("filter");
+                        if (catFilter == "" || catFilter.equals(category))
+                            toDisplay.add(new Opportunity(id, name, img_loc, date, level, longDecs, shortDesc, dimScore, location));
                     }
                 }
                 CustomeAdapter adapter = new CustomeAdapter(getActivity(), toDisplay);
                 setListAdapter(adapter);
-
             }
 
             @Override
             public void onCancelled(FirebaseError error) {
             }
         });
-
         return rootView;
     }
 
