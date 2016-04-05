@@ -1,6 +1,5 @@
 package com.example.chinmayee.mainactivity;
 
-import android.app.Application;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
@@ -8,7 +7,6 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.Window;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
@@ -18,15 +16,10 @@ import com.firebase.client.Firebase;
 
 import android.content.Intent;
 import android.content.res.Configuration;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarActivity;
-import android.support.v7.app.ActionBarDrawerToggle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
 
 
 public class MyOppsActivity extends AppCompatActivity {
@@ -183,7 +176,7 @@ public class MyOppsActivity extends AppCompatActivity {
         // TODO Auto-generated method stub
 
         Intent intent = getIntent();
-        MyApplication myapp = (MyApplication) getApplication();
+        Drive myapp = (Drive) getApplication();
 
         Bundle b = new Bundle();
         b.putString("nuId", myapp.getUserId());

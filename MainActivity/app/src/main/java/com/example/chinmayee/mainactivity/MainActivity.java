@@ -2,7 +2,6 @@ package com.example.chinmayee.mainactivity;
 
 import android.content.Intent;
 import android.content.res.Configuration;
-import android.graphics.Rect;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -13,14 +12,12 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.graphics.BitmapFactory;
 import android.graphics.Bitmap;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.content.Intent;
 
 import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
@@ -87,7 +84,7 @@ public class MainActivity extends AppCompatActivity {
         mBar4 = (ProgressBar) findViewById(R.id.d4);
         mBar5 = (ProgressBar) findViewById(R.id.d5);
 
-        MyApplication myapp = (MyApplication) getApplication();
+        Drive myapp = (Drive) getApplication();
         String userId = myapp.getUserId();
 
         String searchUser = "user/" + userId;
@@ -116,8 +113,11 @@ public class MainActivity extends AppCompatActivity {
                         dimScore[j - 1] = Integer.parseInt((String) postSnapshot.child("dimensions").child("d" + j).getValue());
                         sumScore += dimScore[j - 1];
                     }
+                    int levelScore = 1000;
+
+                    mBar0.setMax(levelScore);
                     mBar0.setProgress(sumScore);
-                    mText4.setText(sumScore + "/1000");
+                    mText4.setText(sumScore + "/"+levelScore);
 
                     // Update 5 progress bars
                     mBar1.setProgress(Integer.parseInt((String) postSnapshot.child("dimensions").child("d1").getValue()));

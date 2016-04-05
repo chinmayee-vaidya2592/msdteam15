@@ -1,5 +1,6 @@
 package com.example.chinmayee.mainactivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
 import android.view.LayoutInflater;
@@ -71,6 +72,12 @@ public class AllOppFragment extends ListFragment {
 
     @Override
     public void onListItemClick(ListView l, View v, int position, long id) {
-        Toast.makeText(getActivity(),getListView().getItemAtPosition(position).toString(),Toast.LENGTH_SHORT ).show();
+        Intent i = new Intent(getActivity().getApplicationContext(), OppDetail.class);
+        Bundle b = new Bundle();
+        b.putInt("oppId", toDisplay.get(position).getId()); //Your id
+        b.putString("userLevel", "1");
+        i.putExtras(b); //Put your id to your next Intent
+        startActivity(i);
+        //Toast.makeText(getActivity(),getListView().getItemAtPosition(position).toString(),Toast.LENGTH_SHORT ).show();
     }
 }

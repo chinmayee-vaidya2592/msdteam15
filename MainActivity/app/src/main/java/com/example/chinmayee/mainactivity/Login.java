@@ -2,20 +2,17 @@ package com.example.chinmayee.mainactivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 public class Login extends AppCompatActivity {
 
 
-    MyApplication myapp;
+    Drive myapp;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,7 +37,7 @@ public class Login extends AppCompatActivity {
                 if (uname.equals("demo") && pass.equals("demo1")) {
                     Intent intent = new Intent(Login.this, HomeActivity.class);
                   //  intent.putExtra("username", edUsername.getText().toString());
-                    myapp = (MyApplication) getApplication();
+                    myapp = (Drive) getApplication();
                     myapp.setUserId("001722744");
                     myapp.setUserEmail(uname);
                     myapp.setLevel("1");

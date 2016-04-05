@@ -22,7 +22,6 @@ import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.SearchView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
@@ -148,6 +147,18 @@ public class HomeActivity extends AppCompatActivity {
         mDrawerLayout.setDrawerListener(mDrawerToggle);
     }
 
+    @Override
+    protected void onStop() {
+        //
+        System.out.println("Stopped activity HomeActivity");
+        super.onStop();
+    }
+
+    @Override
+    protected void onPause() {
+        System.out.println("Paused activity HomeActivity");
+        super.onPause();
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -305,9 +316,7 @@ public class HomeActivity extends AppCompatActivity {
 
     private void setupTablayout() {
 
-        MyApplication myapp = (MyApplication) getApplication();
-
-
+        Drive myapp = (Drive) getApplication();
         String userId = myapp.getUserId();
         getUserFromDb(userId);
         Intent intent = getIntent();

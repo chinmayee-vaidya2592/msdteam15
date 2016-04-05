@@ -4,7 +4,7 @@ import android.app.Application;
 /**
  * Created by bhumi on 4/4/2016.
  */
-public class MyApplication extends Application {
+public class Drive extends Application {
 
     private String userId;
     private String userEmail;
