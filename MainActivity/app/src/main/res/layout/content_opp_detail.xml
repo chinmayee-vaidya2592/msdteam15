@@ -225,6 +225,11 @@
                 android:textSize="20dp"
                 android:textColor="#000000"/>
 
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="20px"
+                android:background="@android:color/darker_gray"/>
 
             <HorizontalScrollView
                 android:layout_width="wrap_content"
@@ -240,6 +245,10 @@
                 </LinearLayout>
             </HorizontalScrollView>
 
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="20px"/>
         </LinearLayout>
     </ScrollView>
 
