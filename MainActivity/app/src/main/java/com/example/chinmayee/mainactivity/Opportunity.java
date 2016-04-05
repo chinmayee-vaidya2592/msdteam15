@@ -49,6 +49,8 @@ public class Opportunity {
         this.location= location;
     }
 
+    public Opportunity() {}
+
 
     public int getId() {
         return id;

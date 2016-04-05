@@ -10,6 +10,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+
 import org.lucasr.twowayview.TwoWayView;
 
 public class ListAdapters extends AppCompatActivity {
@@ -28,9 +29,11 @@ public class ListAdapters extends AppCompatActivity {
                 this,
                 R.layout.simple_list_item_1,
                 myStringArray);
-        TwoWayView myList=(TwoWayView)
-                findViewById(R.id.list);
-        myList.setAdapter(myAdapter);
+        myAdapter.notifyDataSetChanged();
+        ListView mylist = (ListView) findViewById(R.id.my_list);
+        mylist.setVisibility(View.VISIBLE);
+        //TwoWayView myList=(TwoWayView) findViewById(R.id.list);
+        mylist.setAdapter(myAdapter);
     }
 
     @Override
