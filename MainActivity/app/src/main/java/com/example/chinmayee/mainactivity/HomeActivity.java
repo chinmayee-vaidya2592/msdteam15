@@ -357,7 +357,6 @@ public class HomeActivity extends AppCompatActivity {
         myFirebaseRef.child(user).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                System.out.println("**********************************" + dataSnapshot);
                 Integer lev = Integer.parseInt(dataSnapshot.child("level").getValue().toString());
                 userLevel = lev.toString();
                 Integer[] dimScore = new Integer[5];

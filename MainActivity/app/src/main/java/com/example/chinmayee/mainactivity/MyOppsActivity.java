@@ -23,9 +23,7 @@ import android.widget.AdapterView;
 
 
 public class MyOppsActivity extends AppCompatActivity {
-
-
-    //new
+//new
     private ListView mDrawerList;
     private DrawerLayout mDrawerLayout;
     private ArrayAdapter<String> mAdapter;
@@ -33,7 +31,6 @@ public class MyOppsActivity extends AppCompatActivity {
     private String mActivityTitle;
 
     TabLayout tabLayout;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
