@@ -20,8 +20,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-;
-
 /**
  * Created by Swapnil on 3/24/2016.
  */
@@ -29,11 +27,11 @@ public class CompletedFragment extends Fragment {
 
     View rootView;
     ExpandableListView lv;
-    //private Opportunity[] groups;
     private List<Opportunity> toDisplay;
     private Map<Integer, Integer[]> children;
     private Firebase myFirebaseRef = new Firebase("https://flickering-inferno-293.firebaseio.com/");
-
+    private Bundle bundle;
+    private final List<Integer> completed = new ArrayList<Integer>();
     public CompletedFragment(){
     }
 
@@ -49,49 +47,69 @@ public class CompletedFragment extends Fragment {
     }
 
     @Override
-    public void onViewCreated(View view, Bundle savedInstanceState) {
+    public void onViewCreated(final View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
-        lv = (ExpandableListView) view.findViewById(R.id.expListView);
-        children = new HashMap<Integer, Integer[]>();
-        myFirebaseRef.child("opportunity").addValueEventListener(new ValueEventListener() {
+        bundle = getArguments();
+        myFirebaseRef.child("completed").addValueEventListener(new ValueEventListener() {
             @Override
-            public void onDataChange(DataSnapshot snapshot) {
-                toDisplay = new ArrayList<>();
-                int pos = 0;
-                for (DataSnapshot messageSnapshot : snapshot.getChildren()) {
-                    for (int i = 0; i < 10; i++) {
-                        int id = Integer.parseInt((String) messageSnapshot.child("oppId").getValue());
-                        String img_loc = (String) messageSnapshot.child("pic").getValue();
-                        int level = Integer.parseInt((String) messageSnapshot.child("level").getValue());
-                        String longDecs = (String) messageSnapshot.child("longDesc").getValue();
-                        String shortDesc = (String) messageSnapshot.child("shortDesc").getValue();
-                        String location = (String) messageSnapshot.child("location").getValue();
-                        Integer[] dimScore = new Integer[5];
-                        int sumScore = 0;
-                        for (int j = 1; j < 6; j++) {
-                            dimScore[j - 1] = Integer.parseInt((String) messageSnapshot.child("score").child("d" + j).getValue());
-                            sumScore += dimScore[j - 1];
-                        }
-                        String date = (String) messageSnapshot.child("start date").getValue();
-                        String name = (String) messageSnapshot.child("name").getValue();
-                        toDisplay.add(pos, new Opportunity(id, name, img_loc, date, level, longDecs, shortDesc, dimScore, location));
-                        children.put(pos, dimScore);
-                        pos++;
-                        //System.out.println(toDisplay.size() + "**********************************************" + date + " " + name);
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
+                    if (dataSnapshot1.child("nuid").getValue().toString().equals(bundle.getString("nuId"))) {
+                        completed.add(Integer.valueOf(dataSnapshot1.child("oppId").getValue().toString()));
+                        System.out.println("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%" + completed);
                     }
                 }
-                System.out.println(toDisplay.size() + "**********************************************" + toDisplay.get(pos - 1).getShortDesc() + " " + children.get(pos - 1).toString());
-                lv.setAdapter(new ExpandableListAdapter(toDisplay, children));
-                lv.setGroupIndicator(null);
+                processIds(view);
             }
-
             @Override
-            public void onCancelled(FirebaseError error) {
+            public void onCancelled(FirebaseError firebaseError) {
             }
         });
+    }
 
+    private void processIds(View view){
+        lv = (ExpandableListView) view.findViewById(R.id.expListView);
+        children = new HashMap<Integer, Integer[]>();
+        if (completed.size()!=0) {
+            myFirebaseRef.child("opportunity").addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot snapshot) {
+                    toDisplay = new ArrayList<>();
+                    int pos = 0;
+                    for (DataSnapshot messageSnapshot : snapshot.getChildren()) {
+                        for (int i = 0; i < 1; i++) {
+                            int id = Integer.parseInt((String) messageSnapshot.child("oppId").getValue());
+                            String img_loc = (String) messageSnapshot.child("pic").getValue();
+                            int level = Integer.parseInt((String) messageSnapshot.child("level").getValue());
+                            String longDecs = (String) messageSnapshot.child("longDesc").getValue();
+                            String shortDesc = (String) messageSnapshot.child("shortDesc").getValue();
+                            String location = (String) messageSnapshot.child("location").getValue();
+                            Integer[] dimScore = new Integer[5];
+                            int sumScore = 0;
+                            for (int j = 1; j < 6; j++) {
+                                dimScore[j - 1] = Integer.parseInt((String) messageSnapshot.child("score").child("d" + j).getValue());
+                                sumScore += dimScore[j - 1];
+                            }
+                            String date = (String) messageSnapshot.child("start date").getValue();
+                            String name = (String) messageSnapshot.child("name").getValue();
+                            if (completed.contains(id)) {
+                                toDisplay.add(pos, new Opportunity(id, name, img_loc, date, level, longDecs, shortDesc, dimScore, location));
+                                children.put(pos, dimScore);
+                                pos++;
+                            }
+                            //System.out.println(toDisplay.size() + "**********************************************" + date + " " + name);
+                        }
+                    }
+                    System.out.println(toDisplay.size() + "**********************************************" + toDisplay.get(pos - 1).getShortDesc() + " " + children.get(pos - 1).toString());
+                    lv.setAdapter(new ExpandableListAdapter(toDisplay, children));
+                    lv.setGroupIndicator(null);
+                }
 
+                @Override
+                public void onCancelled(FirebaseError error) {
+                }
+            });
+        }
 
     }
 

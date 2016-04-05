@@ -1,5 +1,6 @@
 package com.example.chinmayee.mainactivity;
 
+import android.app.Application;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
@@ -180,6 +181,16 @@ public class MyOppsActivity extends AppCompatActivity {
 
     private void setupTablayout() {
         // TODO Auto-generated method stub
+
+        Intent intent = getIntent();
+        MyApplication myapp = (MyApplication) getApplication();
+
+        Bundle b = new Bundle();
+        b.putString("nuId", myapp.getUserId());
+        b.putString("filter", ""); //Your id
+        b.putString("userLevel", myapp.getLevel());
+        intent.putExtras(b);
+
         tabLayout = (TabLayout) findViewById(R.id.tabLayout);
         tabLayout.setTabGravity(TabLayout.GRAVITY_CENTER);
         tabLayout.addTab(tabLayout.newTab().setText("INPROGRESS"));
@@ -188,7 +199,7 @@ public class MyOppsActivity extends AppCompatActivity {
         tabLayout.addTab(tabLayout.newTab().setText("  SAVED"));
         final ViewPager viewPager = (ViewPager) findViewById(R.id.pager);
         final MyOppPagerAdapter adapter = new MyOppPagerAdapter(getSupportFragmentManager(),
-                                                                    tabLayout.getTabCount());
+                tabLayout.getTabCount(), intent.getExtras());
         viewPager.setAdapter(adapter);
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
         tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {

@@ -23,16 +23,17 @@ import java.util.List;
  */
 public class ThisWeekOppFragment extends ListFragment {
         private List<Opportunity> toDisplay;
-        private Firebase myFirebaseRef = new Firebase("https://flickering-inferno-293.firebaseio.com/");
+        private Firebase myFirebaseRef;
+        private Bundle bundle;
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
                 View rootView = inflater.inflate(R.layout.this_week_opportunities, container, false);
-                //toDisplay.add("TEST1");
-
+                myFirebaseRef = new Firebase("https://flickering-inferno-293.firebaseio.com/");
                 myFirebaseRef.child("opportunity").addValueEventListener(new ValueEventListener() {
                         @Override
                         public void onDataChange(DataSnapshot snapshot) {
                                 toDisplay = new ArrayList<>();
+                                bundle = getArguments();
                                 for (DataSnapshot messageSnapshot : snapshot.getChildren()) {
                                         for (int i =0; i<1; i++) {
                                                 int id = Integer.parseInt((String)messageSnapshot.child("oppId").getValue());
@@ -49,21 +50,19 @@ public class ThisWeekOppFragment extends ListFragment {
                                                 }
                                                 String date = (String) messageSnapshot.child("start date").getValue();
                                                 String name = (String) messageSnapshot.child("name").getValue();
-                                                //TODO: add logic for date matching
-                                                toDisplay.add(new Opportunity(id, name, img_loc, date, level, longDecs, shortDesc, dimScore, location));
-                                                //System.out.println(toDisplay.size() + "**********************************************" + date + " " + name);
+                                                String category = (String) messageSnapshot.child("category").getValue();
+                                                String catFilter = bundle.getString("filter");
+                                                if (catFilter == "" || catFilter.equals(category))
+                                                        toDisplay.add(new Opportunity(id, name, img_loc, date, level, longDecs, shortDesc, dimScore, location));
                                         }
                                 }
                                 CustomeAdapter adapter = new CustomeAdapter(getActivity(), toDisplay);
                                 setListAdapter(adapter);
-
                         }
-
                         @Override
                         public void onCancelled(FirebaseError error) {
                         }
                 });
-
                 return rootView;
         }
 

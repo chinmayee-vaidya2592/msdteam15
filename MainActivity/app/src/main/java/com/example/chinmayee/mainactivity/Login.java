@@ -43,6 +43,7 @@ public class Login extends AppCompatActivity {
                     myapp = (MyApplication) getApplication();
                     myapp.setUserId("001722744");
                     myapp.setUserEmail(uname);
+                    myapp.setLevel("1");
                     startActivity(intent);
                 } else {
                     Toast.makeText(Login.this, "Invalid Usename password pair.- Username- "+uname+"Pwd- "+pass, Toast.LENGTH_LONG).show();

@@ -1,5 +1,6 @@
 package com.example.chinmayee.mainactivity;
 
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
@@ -11,10 +12,12 @@ import android.support.v4.app.FragmentStatePagerAdapter;
  */
 public class MyOppPagerAdapter extends FragmentStatePagerAdapter {
     int mNumOfTabs;
+    Bundle bundle;
 
-    public MyOppPagerAdapter(FragmentManager fm, int NumOfTabs) {
+    public MyOppPagerAdapter(FragmentManager fm, int NumOfTabs, Bundle bundle) {
         super(fm);
         this.mNumOfTabs = NumOfTabs;
+        this.bundle = bundle;
     }
 
     @Override
@@ -23,16 +26,20 @@ public class MyOppPagerAdapter extends FragmentStatePagerAdapter {
         switch (position) {
             case 0:
                 InProgressFragment inProgress = new InProgressFragment();
+                inProgress.setArguments(bundle);
                 return inProgress;
             case 1:
-                UpcomingOppFragment all = new UpcomingOppFragment();
-                return all;
+                UpcomingOppFragment upcoming = new UpcomingOppFragment();
+                upcoming.setArguments(bundle);
+                return upcoming;
             case 2:
-                CompletedFragment completedFragment = new CompletedFragment();
-                return completedFragment;
+                CompletedFragment completed = new CompletedFragment();
+                completed.setArguments(bundle);
+                return completed;
             case 3:
-                RecomOppFragment recc = new RecomOppFragment();
-                return recc;
+                SavedOppFragment saved = new SavedOppFragment();
+                saved.setArguments(bundle);
+                return saved;
             default:
                 return null;
         }

@@ -21,24 +21,23 @@ import java.util.List;
 /**
  * Created by Swapnil on 3/24/2016.
  */
-public class InProgressFragment extends ListFragment {
+public class SavedOppFragment extends ListFragment {
     private List<Opportunity> toDisplay;
     private Firebase myFirebaseRef = new Firebase("https://flickering-inferno-293.firebaseio.com/");
     private Bundle bundle;
-    private final List<Integer> inProgressIds = new ArrayList<Integer>();
+    private final List<Integer> saved = new ArrayList<Integer>();
     @Override
     public View onCreateView(final LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.inprogress_opportunities, container, false);
+        View rootView = inflater.inflate(R.layout.saved_opportunities, container, false);
         bundle = getArguments();
-        myFirebaseRef.child("inprogress").addValueEventListener(new ValueEventListener() {
+        myFirebaseRef.child("saved").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
-                    if (dataSnapshot1.child("nuid").getValue().toString().equals(bundle.getString("nuId"))) {
-                        inProgressIds.add(Integer.valueOf(dataSnapshot1.child("oppId").getValue().toString()));
-                        System.out.println("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%" + inProgressIds);
+                    for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()){
+                        if (dataSnapshot1.child("nuid").getValue().toString().equals(bundle.getString("nuId"))){
+                            saved.add(Integer.valueOf(dataSnapshot1.child("oppId").getValue().toString()));
+                        }
                     }
-                }
                 processIds();
             }
 
@@ -49,8 +48,8 @@ public class InProgressFragment extends ListFragment {
         return rootView;
     }
 
-    private void processIds (){
-        if (inProgressIds.size() != 0) {
+    private void processIds(){
+        if (saved.size() != 0) {
             myFirebaseRef.child("opportunity").addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot snapshot) {
@@ -71,7 +70,7 @@ public class InProgressFragment extends ListFragment {
                             }
                             String date = (String) messageSnapshot.child("start date").getValue();
                             String name = (String) messageSnapshot.child("name").getValue();
-                            if (inProgressIds.contains(id))
+                            if (saved.contains(id))
                                 toDisplay.add(new Opportunity(id, name, img_loc, date, level, longDecs, shortDesc, dimScore, location));
                         }
                     }
