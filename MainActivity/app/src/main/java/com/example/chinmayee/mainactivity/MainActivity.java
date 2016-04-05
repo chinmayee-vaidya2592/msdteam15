@@ -20,6 +20,7 @@ import android.graphics.Bitmap;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.content.Intent;
 
 import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
@@ -155,6 +156,12 @@ public class MainActivity extends AppCompatActivity {
                 openActivity(position);
             }
         });
+    }
+
+    /** Called when the user clicks the Edit button */
+    public void goToEdit(View view) {
+        Intent intent = new Intent(this, EditProfile.class);
+        startActivity(intent);
     }
 
     protected void openActivity(int position) {
