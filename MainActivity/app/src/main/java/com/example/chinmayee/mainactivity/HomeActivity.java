@@ -2,14 +2,23 @@ package com.example.chinmayee.mainactivity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.SearchView;
 import android.widget.TextView;
@@ -33,6 +42,13 @@ public class HomeActivity extends AppCompatActivity {
     private ProgressBar progressBar;
     private String userLevel;
 
+    //new
+    private ListView mDrawerList;
+    private DrawerLayout mDrawerLayout;
+    private ArrayAdapter<String> mAdapter;
+    private ActionBarDrawerToggle mDrawerToggle;
+    private String mActivityTitle;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,7 +58,137 @@ public class HomeActivity extends AppCompatActivity {
         setupTablayout();
         setupSearch();
         setupButtonsAction();
+
+        //new
+        setupToolbar();
+        mDrawerList = (ListView)findViewById(R.id.navList2);
+        mDrawerLayout = (DrawerLayout)findViewById(R.id.drawer_layout2);
+        mActivityTitle = "HOME";
+        addDrawerItems();
+        setupDrawer();
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeButtonEnabled(true);
+
+
     }
+
+
+    //new
+
+    private void setupToolbar() {
+        // TODO Auto-generated method stub
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbarsdfs2);
+        if (toolbar != null) {
+            setSupportActionBar(toolbar);
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);}
+    }
+
+    private void addDrawerItems() {
+        String[] osArray = { "HOME", "MY INFO", "MY OPPORTUNITIES", "LOGOUT" };
+        mAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, osArray);
+        mDrawerList.setAdapter(mAdapter);
+
+        mDrawerList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                // Toast.makeText(MyOppsActivity.this, "Time for an upgrade!"+position+" "+id, Toast.LENGTH_SHORT).show();
+                openActivity(position);
+            }
+        });
+    }
+
+    protected void openActivity(int position) {
+
+        mDrawerList.setItemChecked(position, true);
+//		setTitle(listArray[position]);
+        mDrawerLayout.closeDrawer(mDrawerList);
+        // BaseActivity.position = position; //Setting currently selected position in this field so that it will be available in our child activities.
+
+        switch (position) {
+            case 0:
+                startActivity(new Intent(this, HomeActivity.class));
+                break;
+            case 1:
+                startActivity(new Intent(this, MainActivity.class));
+                break;
+            case 2:
+                startActivity(new Intent(this, MyOppsActivity.class));
+                break;
+            case 3:
+                //  startActivity(new Intent(this, Item3Activity.class));
+                break;
+
+            default:
+                break;
+        }
+
+//		Toast.makeText(this, "Selected Item Position::"+position, Toast.LENGTH_LONG).show();
+    }
+
+    private void setupDrawer() {
+        mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, R.string.drawer_open, R.string.drawer_close) {
+
+
+            public void onDrawerOpened(View drawerView) {
+                super.onDrawerOpened(drawerView);
+                getSupportActionBar().setTitle("MENU");
+                invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
+            }
+
+
+            public void onDrawerClosed(View view) {
+                super.onDrawerClosed(view);
+                getSupportActionBar().setTitle("HOME");
+                invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
+            }
+        };
+
+        mDrawerToggle.setDrawerIndicatorEnabled(true);
+        mDrawerLayout.setDrawerListener(mDrawerToggle);
+    }
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.action_settings) {
+            return true;
+        }
+
+        if (mDrawerToggle.onOptionsItemSelected(item)) {
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onPostCreate(Bundle savedInstanceState) {
+        super.onPostCreate(savedInstanceState);
+        // Sync the toggle state after onRestoreInstanceState has occurred.
+        mDrawerToggle.syncState();
+    }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        mDrawerToggle.onConfigurationChanged(newConfig);
+    }
+
+    //new end
 
     private void setupButtonsAction(){
         buttonWorkshop = (Button) findViewById(R.id.workshop);
@@ -120,7 +266,7 @@ public class HomeActivity extends AppCompatActivity {
 
     private void setupSearch(){
         searchView = (SearchView) findViewById(R.id.searchView);
-        searchView.setQueryHint("Search Catagory");
+        searchView.setQueryHint("Search Category");
 
         searchView.setOnQueryTextFocusChangeListener(new View.OnFocusChangeListener() {
 
@@ -136,12 +282,12 @@ public class HomeActivity extends AppCompatActivity {
             public boolean onQueryTextSubmit(String query) {
                 View view = getCurrentFocus();
                 if (view != null) {
-                    InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+                    InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
                     imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
                     searchView = (SearchView) findViewById(R.id.searchView);
                     searchView.setIconified(true);
                 }
-                Intent myIntent = new Intent(HomeActivity.this,OpportunityActivity.class);
+                Intent myIntent = new Intent(HomeActivity.this, OpportunityActivity.class);
                 Bundle b = new Bundle();
                 b.putString("filter", query); //Your id
                 b.putString("userLevel", userLevel);
@@ -224,7 +370,7 @@ public class HomeActivity extends AppCompatActivity {
                         progressBar = (ProgressBar) findViewById(R.id.progressBarHome);
                         progressBar.setMax(Integer.parseInt(levScore));
                         progressBar.setProgress(nextScore);
-                        progressScore.setText(nextScore + "/" + levScore + " Pts");
+                        progressScore.setText(nextScore + "/" + levScore + " Points");
                     }
                     @Override
                     public void onCancelled(FirebaseError firebaseError) {}

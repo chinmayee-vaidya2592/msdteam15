@@ -62,7 +62,6 @@ public class MainActivity extends AppCompatActivity {
         mDrawerLayout = (DrawerLayout)findViewById(R.id.drawer_layout1);
         mActivityTitle = "MY INFO";
 
-
         addDrawerItems();
         setupDrawer();
 
