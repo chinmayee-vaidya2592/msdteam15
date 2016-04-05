@@ -86,14 +86,15 @@ public class MainActivity extends AppCompatActivity {
         mBar4 = (ProgressBar) findViewById(R.id.d4);
         mBar5 = (ProgressBar) findViewById(R.id.d5);
 
+        MyApplication myapp = (MyApplication) getApplication();
+        String userId = myapp.getUserId();
+
+        String searchUser = "user/" + userId;
         // Attach an listener to read the data at our posts reference
-        mFBRef.child("user").addValueEventListener(new ValueEventListener() {
+        mFBRef.child(searchUser).addValueEventListener(new ValueEventListener() {
             @Override
-            public void onDataChange(DataSnapshot snapshot) {
-                for (DataSnapshot postSnapshot : snapshot.getChildren()) {
-
+            public void onDataChange(DataSnapshot postSnapshot) {
                     // Missing image
-
                     // Set user name
                     String name = (String) postSnapshot.child("fname").getValue() + " " +
                             (String) postSnapshot.child("lname").getValue();
@@ -125,7 +126,6 @@ public class MainActivity extends AppCompatActivity {
                     mBar5.setProgress(Integer.parseInt((String) postSnapshot.child("dimensions").child("d5").getValue()));
 
                 }
-            }
 
             @Override
             public void onCancelled(FirebaseError firebaseError) {

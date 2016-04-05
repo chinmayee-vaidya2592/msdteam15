@@ -305,7 +305,10 @@ public class HomeActivity extends AppCompatActivity {
 
     private void setupTablayout() {
 
-        String userId = "001722744";
+        MyApplication myapp = (MyApplication) getApplication();
+
+
+        String userId = myapp.getUserId();
         getUserFromDb(userId);
         Intent intent = getIntent();
 
