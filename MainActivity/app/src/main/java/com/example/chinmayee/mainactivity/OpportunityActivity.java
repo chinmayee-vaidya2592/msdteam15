@@ -9,6 +9,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.Html;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -27,6 +28,7 @@ public class OpportunityActivity extends AppCompatActivity {
     private ArrayAdapter<String> mAdapter;
     private ActionBarDrawerToggle mDrawerToggle;
     private String mActivityTitle;
+    private String filter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,8 +39,9 @@ public class OpportunityActivity extends AppCompatActivity {
 
         mDrawerList = (ListView)findViewById(R.id.navList);
         mDrawerLayout = (DrawerLayout)findViewById(R.id.drawer_layout);
-        mActivityTitle = "OPPORTUNITIES";
-
+        filter =  getIntent().getExtras().getString("filter");
+        mActivityTitle = "search result for : " + filter;
+        this.setTitle(Html.fromHtml("<small>"+mActivityTitle+"</small>"));
         addDrawerItems();
         setupDrawer();
 
@@ -112,7 +115,8 @@ public class OpportunityActivity extends AppCompatActivity {
 
             public void onDrawerClosed(View view) {
                 super.onDrawerClosed(view);
-                getSupportActionBar().setTitle(mActivityTitle);
+                getSupportActionBar().setTitle(Html.fromHtml("<small>"+mActivityTitle+"</small>"));
+                //getSupportActionBar().setTitle(mActivityTitle);
                 invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
             }
         };
